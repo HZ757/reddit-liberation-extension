@@ -25,7 +25,7 @@ chrome.storage.sync.get(['userData'], function(result) {
 
             userData = {whiteList: whiteList, blackList: blackList}
             chrome.storage.sync.set({userData: userData}, function() {
-                console.log('Value is set to ' + userData)
+                //console.log('Value is set to ' + userData)
             });
             document.getElementById("addWhiteListButton").onclick = addList;
         }
@@ -37,7 +37,7 @@ chrome.storage.sync.get(['userData'], function(result) {
 
             userData = {whiteList: whiteList, blackList: blackList}
             chrome.storage.sync.set({userData: userData}, function() {
-                console.log('Value is set to ' + userData)
+                //console.log('Value is set to ' + userData)
             });
             document.getElementById("addBlackListButton").onclick = addList;
         }
@@ -46,18 +46,30 @@ chrome.storage.sync.get(['userData'], function(result) {
     var removeFromList = function()
     {
         subredditName = this.innerText.substring(0, this.innerText.length-2);
-        //const isSubredditname = (element)
+        var isSubredditname = (element) => element == subredditName;
         // find the subreddit name whiteList/blackList and remove it from there
         // update google storage
         // remove the element from the options page
 
-        if (this.id == "whiteElement")
+        if (this.className == "whiteElement")
         {
+            whiteList.splice(whiteList.findIndex(isSubredditname), 1);
+            userData = {whiteList: whiteList, blackList: blackList}
+            chrome.storage.sync.set({userData: userData}, function() {
+                
+            });
             this.remove();
+            
         }
         else
         {
+            blackList.splice(blackList.findIndex(isSubredditname), 1);
+            userData = {whiteList: whiteList, blackList: blackList}
+            chrome.storage.sync.set({userData: userData}, function() {
+                
+            });
             this.remove();
+            
         }
     }
 
