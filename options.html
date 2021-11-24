@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head><title>Reddit Liberation options</title></head>
+<head>
+    <title>Reddit Liberation options</title>
+    <link rel="stylesheet" href="options.css">
+</head>
 <body>
 
-Favorite color:
-<select id="color">
- <option value="red">red</option>
- <option value="green">green</option>
- <option value="blue">blue</option>
- <option value="yellow">yellow</option>
-</select>
+<div id="lists">
+    <h1>Reddit Liberation App</h1>
+    <div id="white">
+        <h2>Whitelist: subreddits that you would like to view (intended for productivity purposes)</h2>
+        <div id="whiteList">
+            <!-- There will be generated buttons here -->
+        </div>
+    </div>
 
-<label>
-  <input type="checkbox" id="like">
-  I like colors.
-</label>
+    <div style="height:50px"></div>
+
+    <div id="black">
+        <h2>BlackList: subreddits that you would like to block the comments of (if you keep ending wasting time in their comments sections)</h2>
+        <div id="blackList">
+            <!-- There will be generated buttons here -->
+        </div>
+    </div>
+
+    <div style="height:50px"></div>
+</div>
 
 <div id="status"></div>
 <button id="save">Save</button>

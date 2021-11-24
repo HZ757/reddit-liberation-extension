@@ -1,0 +1,27 @@
+h2 {
+    font-size: 100%;
+}
+
+#lists {
+    display: flex;
+    flex-direction: column;
+}
+
+#white, #black {
+    display: flex;
+    flex-direction: column;
+}
+
+#whiteElement {
+    background: none;
+    border-style: none;
+    color: green;
+    font-weight: bold;
+}
+
+#blackElement {
+    background: none;
+    border-style: none;
+    color: red;
+    font-weight: bold;
+}
