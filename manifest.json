@@ -3,11 +3,19 @@
     "description": "Minimize lost productivity on reddit",
     "version": "1.0",
     "manifest_version": 3,
+    "action": {},
+    "background": {
+        "service_worker": "background.js"
+    },
     "content_scripts": [
         {
           "matches": ["https://*.reddit.com/*"],
           "css": ["my-styles.css"],
           "js": ["content-script.js"]
         }
-    ]
-  }
+    ],
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": false
+    }
+}
