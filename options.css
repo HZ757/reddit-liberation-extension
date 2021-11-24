@@ -7,7 +7,7 @@ h2 {
     flex-direction: column;
 }
 
-#white, #black {
+#white, #black, #whiteList, #blackList {
     display: flex;
     flex-direction: column;
 }
@@ -24,4 +24,8 @@ h2 {
     border-style: none;
     color: red;
     font-weight: bold;
+}
+
+button {
+    cursor:pointer;
 }

@@ -16,6 +16,14 @@ if (pathName != null )
                 document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p>";
             }
         })
+
+        if (!window.location.href.includes("old."))
+        {
+            setTimeout(() => {  
+                document.getElementsByClassName('_2l7c_Oz0UVsamALvPrlznq')[0].innerHTML = ""
+            }, 5000);
+        }
+        
     }
     else
     {
