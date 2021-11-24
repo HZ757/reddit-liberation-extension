@@ -13,7 +13,7 @@ chrome.storage.sync.get(['userData'], function(result) {
             blackList.forEach(element => {
                 if (pathName.toLowerCase().includes("/r/" + element.toLowerCase()))
                 {
-                    document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p>";
+                    document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p> <p>Extension built by <a href=\"https://henryz.dev/\">Henry Zhang</a></p>";
                 }
             })
 
@@ -40,12 +40,12 @@ chrome.storage.sync.get(['userData'], function(result) {
             // I need to do testing to see if this works, because it could very well not work
             if (willBlock)
             {
-                document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p>";
+                document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p> <p>Extension built by <a href=\"https://henryz.dev/\">Henry Zhang</a></p>";
             }
         }
     }
     else
     {
-        document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p>";
+        document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p> <p>Extension built by <a href=\"https://henryz.dev/\">Henry Zhang</a></p>";
     }
 });
