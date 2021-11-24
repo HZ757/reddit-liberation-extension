@@ -12,14 +12,14 @@ h2 {
     flex-direction: column;
 }
 
-#whiteElement {
+.whiteElement {
     background: none;
     border-style: none;
     color: green;
     font-weight: bold;
 }
 
-#blackElement {
+.blackElement {
     background: none;
     border-style: none;
     color: red;
