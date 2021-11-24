@@ -1,7 +1,12 @@
 
 chrome.storage.sync.get(['userData'], function(result) {
-    whiteList = result.userData.whiteList;
-    blackList = result.userData.blackList;
+    whiteList = [];
+    blackList = [];
+    if (result.userData != undefined)
+    {
+        whiteList = result.userData.whiteList;
+        blackList = result.userData.blackList;
+    }
 
     whiteListElement = document.getElementById("whiteList");
     blackListElement = document.getElementById("blackList");
