@@ -39,4 +39,3 @@ chrome.storage.sync.get(['userData'], function(result) {
     document.getElementById("addWhiteListButton").onclick = addList;
     document.getElementById("addBlackListButton").onclick = addList;
 });
-
