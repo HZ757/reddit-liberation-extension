@@ -1,0 +1,13 @@
+{
+    "name": "Reddit Liberation: Anti Distraction Tool",
+    "description": "Minimize lost productivity on reddit",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+          "matches": ["https://*.reddit.com/*"],
+          "css": ["my-styles.css"],
+          "js": ["content-script.js"]
+        }
+    ]
+  }
