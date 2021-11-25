@@ -46,6 +46,18 @@ chrome.storage.sync.get(['userData'], function(result) {
             });
             document.getElementById("addBlackListButton").onclick = addList;
         }
+
+        let whiteElements = document.getElementsByClassName("whiteElement");
+
+        for(let i = 0; i < whiteElements.length; i++) {
+            whiteElements[i].onclick = removeFromList
+        }
+
+        let blackElements = document.getElementsByClassName("blackElement");
+
+        for(let i = 0; i < blackElements.length; i++) {
+            blackElements[i].onclick = removeFromList
+        }
     }
 
     var removeFromList = function()
