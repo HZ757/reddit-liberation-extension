@@ -1,7 +1,7 @@
 {
     "name": "Reddit Liberation: Feed Blocker",
     "description": "Chrome extension to break the distraction loop of reddit, while still maintaining it's productive utility. works on old.reddit.com",
-    "version": "1.0",
+    "version": "0.1.1",
     "manifest_version": 3,
     "action": {
         "default_icon": {
