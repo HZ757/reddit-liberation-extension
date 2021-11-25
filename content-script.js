@@ -29,7 +29,7 @@ chrome.storage.sync.get(['userData'], function(result) {
             {
                 setTimeout(() => {  
                     document.getElementsByClassName('_2l7c_Oz0UVsamALvPrlznq')[0].innerHTML = ""
-                }, 5000);
+                }, 3500);
             }
             
         }
