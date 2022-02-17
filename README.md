@@ -6,3 +6,5 @@
  Features:
  - blocks infinite feeds
  - custom content filters (whitelist and blacklist)
+
+I am open to changing and improving the app, so please give feedback
