@@ -1,3 +1,20 @@
+function deleteCommentAndLogo() {
+    try{
+        document.getElementsByClassName('_30BbATRhFv3V83DHNDjJAO')[0].innerHTML = ""
+        
+    }
+    catch(err) {
+        
+    }
+
+    try{
+        document.getElementsByClassName('_2l7c_Oz0UVsamALvPrlznq')[0].innerHTML = ""
+    }
+    catch(err) {
+
+    }
+}
+
 chrome.storage.sync.get(['userData'], function(result) {
     whiteList = [];
     blackList = [];
@@ -7,7 +24,6 @@ chrome.storage.sync.get(['userData'], function(result) {
         blackList = result.userData.blackList;
     }
 
-    
 
     pathName = window.location.pathname;
 
@@ -27,9 +43,7 @@ chrome.storage.sync.get(['userData'], function(result) {
 
             if (!window.location.href.includes("old."))
             {
-                setTimeout(() => {  
-                    document.getElementsByClassName('_2l7c_Oz0UVsamALvPrlznq')[0].innerHTML = ""
-                }, 3500);
+                setInterval(deleteCommentAndLogo, 1000)
             }
             
         }
@@ -58,4 +72,6 @@ chrome.storage.sync.get(['userData'], function(result) {
         //document.getElementsByTagName('body')[0].innerHTML = "<k>STOP PROCRASTINATING ON REDDIT</k> <p>You may only go to reddit comment pages</p> <p>Extension built by <a style=\"color:blue\" href=\"https://henryz.dev/\">Henry Zhang</a></p>";
         window.location.href = "https://hz757.github.io/PortfolioWebsite/RedditLiberationRedirect.html";
     }
+
+    setInterval(deleteCommentAndLogo, 500)
 });
