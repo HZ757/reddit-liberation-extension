@@ -40,12 +40,6 @@ chrome.storage.sync.get(['userData'], function(result) {
                     window.location.href = "https://hz757.github.io/PortfolioWebsite/RedditLiberationRedirect.html";
                 }
             })
-
-            if (!window.location.href.includes("old."))
-            {
-                setInterval(deleteCommentAndLogo, 1000)
-            }
-            
         }
         else
         {
