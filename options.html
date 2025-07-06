@@ -3,11 +3,27 @@
 <head>
     <title>Options</title>
     <link rel="stylesheet" href="options.css">
+    <style>
+        document, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
 
-<div id="lists">
+<div style="background-color: purple; color: white; padding: 5px 10px;">
     <h1>Reddit Liberation: Feed Blocker</h1>
+</div>
+
+<div id="lists" style="width: 300px; margin: 10px;" >
+
+    <div>
+        <button id="pauseFor5MinBtn">Pause for 5 minutes</button>
+        <p id="current-pause"></p>
+    </div>
+
     <div id="white">
         <h2>Whitelist: subreddits or users that you would like to view (intended for productivity purposes)</h2>
         <div id="whiteList">

@@ -1,12 +1,105 @@
+class UserData {
+    static promise = null;
+    static async getData() {
+        if (UserData.promise == null) {
+            UserData.promise = chrome.storage.sync.get(['userData']);
+        }
 
-chrome.storage.sync.get(['userData'], function(result) {
+        var data = await UserData.promise;
+        UserData.promise = null;
+
+        return data;
+    }
+
+    static async setData(userData) {
+        await chrome.storage.sync.set({ userData: userData })
+    }
+}
+
+function areSameDay(firstDate, secondDate) {
+    return (firstDate.getFullYear() == secondDate.getFullYear() &&
+        firstDate.getMonth() == secondDate.getMonth() &&
+        firstDate.getDate() == secondDate.getDate());
+}
+
+function hhmmss(seconds) {
+    ss = seconds % 60;
+    mm = Math.floor(seconds / 60);
+
+    hh = Math.floor(mm / 60);
+    mm = mm % 60;
+
+    function pad(num) {
+        return num.toString().padStart(2, '0');
+    }
+
+    return `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
+}
+
+async function updatePausedElement() {
+    var pausedElement = document.getElementById("current-pause");
+
+    var result = await UserData.getData();
+    var pausedUntilTime = result.userData.pausedUntilTime;
+
+    console.log(pausedUntilTime);
+
+    if (pausedUntilTime == null) {
+        pausedElement.innerHTML = '';
+    }
+
+    // populate currently paused time
+    if (pausedUntilTime != null) {
+        var currentTime = Date.now();
+        var pausedTimePassed = pausedUntilTime <= currentTime;
+
+        if (pausedTimePassed) {
+            // eliminate the time from storage
+            pausedElement.innerHTML = '';
+        } else {
+            var time;
+            if (areSameDay(new Date(currentTime), new Date(pausedUntilTime))) {
+                time = new Date(pausedUntilTime).toLocaleTimeString();
+            } else {
+                time = new Date(pausedUntilTime).toLocaleString();
+            }
+            var pausedForInSeconds = Math.ceil((pausedUntilTime - currentTime) / 1000);
+            pausedElement.innerHTML = `Currently paused for <span style="font-family: monospace; font-size: 1.5em;">${hhmmss(pausedForInSeconds)}</span> (until: ${time}) <button id="cancel-pause">Cancel Pause</button>`;
+            document.getElementById("cancel-pause").onclick = cancelPause;
+        }
+    }
+}
+
+async function cancelPause() {
+    const result = await UserData.getData();
+    const newUserData = {...result.userData, pausedUntilTime: null}
+    await chrome.storage.sync.set({userData: newUserData});
+}
+
+var ONE_SECOND = 1_000;
+updatePausedElement();
+setInterval(() => updatePausedElement(), 1000)
+
+UserData.getData().then(function(result) {
     whiteList = [];
     blackList = [];
+    var pausedUntilTime = null;
     if (result.userData != undefined)
     {
         whiteList = result.userData.whiteList;
+        if (whiteList == null) {
+            whiteList = [];
+        }
+
         blackList = result.userData.blackList;
+        if (blackList == null) {
+            blackList = [];
+        }
+
+        pausedUntilTime = result.userData.pausedUntilTime;
     }
+
+    var userData = result.userData;
 
     whiteListElement = document.getElementById("whiteList");
     blackListElement = document.getElementById("blackList");
@@ -28,7 +121,7 @@ chrome.storage.sync.get(['userData'], function(result) {
             whiteListElement.innerHTML += "<button class=\"whiteElement\">" + document.getElementById("addWhiteList").value.toLowerCase() +  " X</button>"
             document.getElementById("addWhiteList").value = ""
 
-            userData = {whiteList: whiteList, blackList: blackList}
+            userData = {...userData, whiteList: whiteList, blackList: blackList}
             chrome.storage.sync.set({userData: userData}, function() {
                 //console.log('Value is set to ' + userData)
             });
@@ -40,7 +133,7 @@ chrome.storage.sync.get(['userData'], function(result) {
             blackListElement.innerHTML += "<button class=\"blackElement\">" + document.getElementById("addBlackList").value.toLowerCase() +  " X</button>"
             document.getElementById("addBlackList").value = ""
 
-            userData = {whiteList: whiteList, blackList: blackList}
+            userData = {...userData, whiteList: whiteList, blackList: blackList}
             chrome.storage.sync.set({userData: userData}, function() {
                 //console.log('Value is set to ' + userData)
             });
@@ -71,25 +164,35 @@ chrome.storage.sync.get(['userData'], function(result) {
         if (this.className == "whiteElement")
         {
             whiteList.splice(whiteList.findIndex(isSubredditname), 1);
-            userData = {whiteList: whiteList, blackList: blackList}
+            userData = {...userData, whiteList: whiteList, blackList: blackList}
             chrome.storage.sync.set({userData: userData}, function() {
-                
+
             });
             this.remove();
-            
+
         }
         else
         {
             blackList.splice(blackList.findIndex(isSubredditname), 1);
-            userData = {whiteList: whiteList, blackList: blackList}
+            userData = {...userData, whiteList: whiteList, blackList: blackList}
             chrome.storage.sync.set({userData: userData}, function() {
-                
+
             });
             this.remove();
-            
+
         }
     }
 
+    var pauseFor5Minutes = function () {
+        pausedUntilTime = new Date().getTime() + 5 * 60 * 1000;
+        userData = { whiteList, blackList, pausedUntilTime };
+
+        UserData.setData(userData).then(() => {
+            updatePausedElement();
+        });
+    }
+
+    document.getElementById("pauseFor5MinBtn").onclick = pauseFor5Minutes;
     document.getElementById("addWhiteListButton").onclick = addList;
     document.getElementById("addBlackListButton").onclick = addList;
 

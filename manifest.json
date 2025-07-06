@@ -9,7 +9,8 @@
             "32": "/images/extension_icon32.png",
             "48": "/images/extension_icon48.png",
             "128": "/images/extension_icon128.png"
-        }
+        },
+        "default_popup": "options.html"
     },
     "background": {
         "service_worker": "background.js"
@@ -23,7 +24,7 @@
     ],
     "options_ui": {
         "page": "options.html",
-        "open_in_tab": false
+        "open_in_tab": true
     },
     "permissions": [
         "storage"
